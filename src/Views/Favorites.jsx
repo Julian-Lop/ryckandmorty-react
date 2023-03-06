@@ -25,15 +25,15 @@ export default function Favorites() {
 	
 	return (
 		<div>
-			<div style={{position:'absolute',width:'50%',left:'0',right:'0',top:'5%',bottom:'0',margin:'auto',textAlign:'center'}}>
+			<div style={{position:'absolute',width:'400px',left:'0',right:'0',top:'5%',bottom:'0',margin:'auto',textAlign:'center'}}>
 				<h1>Favorite Section</h1>
 				<ul style={{padding:'0',width:'100%',listStyle:'none',display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
-					<li style={{cursor:'pointer'}} onClick={() => setTypeFavorite(1)}>Characters</li>
-					<li style={{cursor:'pointer'}} onClick={() => setTypeFavorite(2)}>Locations</li>
-					<li style={{cursor:'pointer'}} onClick={() => setTypeFavorite(3)}>Episodes</li>
+					<li style={{cursor:'pointer',color: typeFavorite == 1 && '#5D44FB',fontWeight:typeFavorite == 1 && 'bold'}} onClick={() => setTypeFavorite(1)}>Characters</li>
+					<li style={{cursor:'pointer',color: typeFavorite == 2 && '#5D44FB',fontWeight:typeFavorite == 2 && 'bold'}} onClick={() => setTypeFavorite(2)}>Locations</li>
+					<li style={{cursor:'pointer',color: typeFavorite == 3 && '#5D44FB',fontWeight:typeFavorite == 3 && 'bold'}} onClick={() => setTypeFavorite(3)}>Episodes</li>
 				</ul>
 			</div>
-			<div style={{position:'relative',marginTop:'150px',padding:'0px'}}>
+			<div style={{position:'relative',marginTop:'150px',padding:'0px',paddingTop:'20px'}}>
 				{typeFavorite === 1 &&
 					<div>
 						{charactersF.arr.length ? <CardFavorites array={charactersF.arr} type={'characters'} /> : <span>Emprty List</span> }

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import Cards from '../Components/Cards'
 
 //Querys
-import { CHARACTERS_PAGE } from '../Graphql/Querys'
+import { CHARACTERS_PAGE_FILTER } from '../Graphql/Querys'
 
 //Actions
 import { getCharacterFavorites } from '../Redux/Reducers/charactersSlice'
@@ -14,11 +14,13 @@ import { getCharacterFavorites } from '../Redux/Reducers/charactersSlice'
 export default function Characters() {
 	const dispatch = useDispatch()
 
-	const [getCharactersPage,result] = useLazyQuery(CHARACTERS_PAGE)
+	const [getCharactersPage,result] = useLazyQuery(CHARACTERS_PAGE_FILTER)
 	const [currentPage, setCurrentPage] = useState(1)
+	const [filter, setFilter] = useState({})
 
 	const setPage = (pag) => {
-		getCharactersPage({variables: {pag: pag}})
+		filter.pag = pag
+		getCharactersPage({variables: filter})
 		setCurrentPage(pag)
 	}
 
@@ -30,9 +32,31 @@ export default function Characters() {
 		dispatch(getCharacterFavorites())
 	},[])
 
+	const filterChange = (e) => {
+		setFilter({
+			...filter,
+			[e.target.name] : e.target.value
+		})
+	}
+
+	const submitFilter = () => {
+		let filterFinally = filter
+		getCharactersPage({variables: filterFinally})
+		setCurrentPage(1)
+	}
+
 	return (
 		<div>
 			<h1>Characters</h1>
+			<div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
+				<input type="text" id='nameF' name='nameF' placeholder='Name..' onChange={(e) => filterChange(e)} />
+				<input type="text" id='stat' name='stat' placeholder='Status..' onChange={(e) => filterChange(e)} />
+				<input type="text" id='typ' name='typ' placeholder='Type..' onChange={(e) => filterChange(e)} />
+				<input type="text" id='gen' name='gen' placeholder='Gender..' onChange={(e) => filterChange(e)} />
+			</div>
+			<div style={{margin:'10px'}}>
+				<button onClick={() => submitFilter()}>Filter</button>
+			</div>
 			<div>
 				<button onClick={() => setPage(prev)}>prev</button>
 				<span style={{marginLeft:'10px',marginRight:'10px',borderRadius:'50px',padding:'10px',background:'#fefefe',color:'#000000'}}>{currentPage}</span>

@@ -11,11 +11,13 @@ export default function Login() {
 
   const submit = async (e) => {
     const auth = getAuth()
-
+    if(!email || !password){
+      return alert('Email or Password empty')
+    }
     try {
       const sign = await signInWithEmailAndPassword(auth,email,password)    
     } catch (error) {
-      console.log('error','invalid')
+      return alert('Wrong email or password')
     } 
     
   }
@@ -31,10 +33,14 @@ export default function Login() {
       {!user.data? 
       <>
         <h1>Login</h1>
-        <label htmlFor="email">Email: </label>
-        <input type="email" id='email' onChange={(e) => setemail(e.target.value)} />
-        <label htmlFor="password">Password: </label>
-        <input type="password" id='password' onChange={(e) => setpassword(e.target.value)} />
+        <div style={{width:'250px', display:'flex', justifyContent:'space-between', margin:'10px'}}>
+          <label htmlFor="email">Email: </label>
+          <input type="email" id='email' onChange={(e) => setemail(e.target.value)} />
+        </div>
+        <div style={{width:'250px',display:'flex', justifyContent:'space-between', margin:'10px'}}>
+          <label htmlFor="password">Password: </label>
+          <input type="password" id='password' onChange={(e) => setpassword(e.target.value)} />
+        </div>
         <button onClick={submit}>Login</button>
       </> :
       <>

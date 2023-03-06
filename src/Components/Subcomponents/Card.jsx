@@ -63,18 +63,18 @@ export default function Card({data,type}) {
   },[charactersF,locationsF,episodesF])
 
   return (
-    <div onClick={() => goInfo()}>
+    <div onClick={() => goInfo()} style={{width:'300px',height:'max-content', border:'1px solid #fefefe',borderRadius:'10px',marginBottom:'20px',paddingBottom:'10px',marginTop:'10px'}}>
         <h2>{data.name}</h2>
         {data.image ? ( <img src={data.image} alt={data.name+' image'} /> ) : null }
-        {data.type ? ( <>Type: <p>{data.type}</p></>) : null}
-        {data.dimension ? ( <>Dimension: <p>{data.dimension}</p></>) : null}
-        {data.air_date ? ( <>Air Date: <p>{data.air_date}</p></>) : null}
-        {data.episode ? ( <>Episode Code: <p>{data.episode}</p></>) : null}
+        {data.type ? ( <p><b>Type:</b> {data.type}</p>) : null}
+        {data.dimension ? ( <p><b>Dimension:</b> {data.dimension}</p>) : null}
+        {data.air_date ? ( <p><b>Air Date:</b> {data.air_date}</p>) : null}
+        {data.episode ? ( <p><b>Episode Code:</b> {data.episode}</p>) : null}
         <br />
         {!isFavorite ?
-          <button onClick={() => addFavorites()}>Add to Favorites</button> 
+          <button style={{background:'#90BF77'}} onClick={() => addFavorites()}>Add to Favorites</button> 
         :
-          <button onClick={() => deleteFavorites()}>Delete Favorites</button>
+          <button style={{background:'#D24B4B'}} onClick={() => deleteFavorites()}>Delete Favorites</button>
         }
     </div>
   )
