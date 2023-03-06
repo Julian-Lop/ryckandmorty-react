@@ -7,7 +7,6 @@ export default function Register() {
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
 
-  const firebase = useFirebaseApp()
   const user = useUser()
 
   const submit = async (e) => {

@@ -1,39 +1,45 @@
-import React from 'react'
-import {gql,useQuery} from '@apollo/client'
+import React, { useEffect } from 'react'
+import {useLazyQuery} from '@apollo/client'
+import { useDispatch } from 'react-redux'
+
+//Components
 import Cards from '../Components/Cards'
 
-export default function Characters() {
-	
-	const ALL_CHARACTERS = gql`
-		query {
-			characters {
-				info {
-					count
-					next
-					prev
-					pages
-				},
-				results {
-					id
-					name
-					image
-				}
-			}
-		}
-	`
-	
-	const {data, error, loading} = useQuery(ALL_CHARACTERS)
+//Querys
+import { CHARACTERS_PAGE } from '../Graphql/Querys'
 
-	if (error) return <span style='color: red'>{error}</span>
+//Actions
+import { getCharacterFavorites } from '../Redux/Reducers/charactersSlice'
+
+export default function Characters() {
+	const dispatch = useDispatch()
+
+	const [getCharactersPage,result] = useLazyQuery(CHARACTERS_PAGE)
+
+	const setPage = (pag) => {
+		getCharactersPage({variables: {pag: pag}})
+	}
+
+	let next = result?.data?.characters?.info.next || 1
+	let prev = result?.data?.characters?.info.prev || 1
+
+	useEffect(()=>{
+		setPage(1)
+		dispatch(getCharacterFavorites())
+	},[])
 
 	return (
 		<div>
-			{loading ? <p>Loading...</p> :
+			<h1>Characters</h1>
+			{!result.data ? <p>Loading...</p> :
 				(
 					<>
-						<h1>Characters</h1>
-						{data && data.characters &&
-							(<Cards array={data.characters} />)
+						<div>
+							<button onClick={() => setPage(prev)}>prev</button>
+							<button onClick={() => setPage(next)}>next</button>
+						</div>
+						{ result.data.characters &&
+							(<Cards array={result.data.characters} type={'characters'} />)
 						}
 						<hr />
 					</>

@@ -5,6 +5,8 @@ import './index.css'
 import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider } from '@apollo/client'
 import { FirebaseAppProvider } from 'reactfire'
 import app from '../firebaseconfig'
+import { Provider } from 'react-redux'
+import { store } from './Redux/store'
 
 const client = new ApolloClient({
   connectToDevTools: true,
@@ -17,9 +19,11 @@ const client = new ApolloClient({
 ReactDOM.createRoot(document.getElementById('root')).render(
   <FirebaseAppProvider firebaseConfig={app} >
       <Suspense fallback={<span>cargando...</span>} >
-        <ApolloProvider client={client}>
-          <App />
-        </ApolloProvider>
+        <Provider store={store}>
+          <ApolloProvider client={client}>
+            <App />
+          </ApolloProvider>
+        </Provider>
       </Suspense>
   </FirebaseAppProvider>,
 )

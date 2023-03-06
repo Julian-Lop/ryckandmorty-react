@@ -1,39 +1,38 @@
-import React from 'react'
-import {gql, useQuery} from '@apollo/client'
+import React, { useEffect } from 'react'
+import {useLazyQuery} from '@apollo/client'
+
+//Components
 import Cards from '../Components/Cards'
 
+//Querys
+import { LOCATIONS_PAGE } from '../Graphql/Querys'
+
 export default function Locations() {
+  const [getLocationsPage,result] = useLazyQuery(LOCATIONS_PAGE)
 
-  const ALL_LOCATIONS = gql`
-    query {
-      locations {
-        info {
-          count
-					next
-					prev
-					pages
-        },
-        results {
-          id
-          name
-          type
-          dimension
-        }
-      }
-    }
-  `
-  const {data, error, loading} = useQuery(ALL_LOCATIONS)
+  const setPage = (pag) => {
+    getLocationsPage({variables: {pag:pag}})
+  }
 
-  if (error) return <span style='color: red'>{error}</span>
+  let next = result?.data?.locations?.info.next || 1
+	let prev = result?.data?.locations?.info.prev || 1
+
+	useEffect(()=>{
+		setPage(1)
+	},[])
 
   return (
     <div>
-      {loading ? <p>Loading...</p> :
+      <h1>Locations</h1>
+      {!result.data ? <p>Loading...</p> :
         (
           <>
-            <h1>Locations</h1>
-            {data && data.locations &&
-							(<Cards array={data.locations} />)
+            <div>
+							<button onClick={() => setPage(prev)}>prev</button>
+							<button onClick={() => setPage(next)}>next</button>
+						</div>
+            {result.data.locations &&
+							(<Cards array={result.data.locations} type={'locations'}/>)
             }
             <hr />
           </>
