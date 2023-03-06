@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import {  useNavigate } from 'react-router-dom'
 
 //Actions
 import { addCharacterFavorite, deleteCharacterfavorite } from '../../Redux/Reducers/charactersSlice'
-import { addLocationFavorite, deleteLocationsfavorite } from '../../Redux/Reducers/locationsSlice'
-import { addEpisodeFavorite, deleteEpisodesfavorite } from '../../Redux/Reducers/episodesSlice'
+import { addLocationFavorite, deleteLocationfavorite } from '../../Redux/Reducers/locationsSlice'
+import { addEpisodeFavorite, deleteEpisodefavorite } from '../../Redux/Reducers/episodesSlice'
 
 export default function Card({data,type}) {
 
@@ -14,9 +15,15 @@ export default function Card({data,type}) {
 
 	const dispatch = useDispatch()
 
+  const navigate = useNavigate()
+
   let favoritos = type == 'characters' ? charactersF : type == 'locations' ? locationsF : episodesF
 
   const [isFavorite, setIsFavorite] = useState(false)
+
+  const goInfo = () => {
+    navigate('/'+type+'/'+data.id)
+  }
 
   const addFavorites = () => {
     switch (type) {
@@ -24,7 +31,7 @@ export default function Card({data,type}) {
         return dispatch(addCharacterFavorite(data))
       case 'locations':
         return dispatch(addLocationFavorite(data))
-      case 'episdoes':
+      case 'episodes':
         return dispatch(addEpisodeFavorite(data)) 
     }
   }
@@ -36,11 +43,11 @@ export default function Card({data,type}) {
         setIsFavorite(false)
         return
       case 'locations':
-        dispatch(deleteLocationsfavorite(data.id))
+        dispatch(deleteLocationfavorite(data.id))
         setIsFavorite(false)
         return
-      case 'episdoes':
-        dispatch(deleteEpisodesfavorite(data.id))
+      case 'episodes':
+        dispatch(deleteEpisodefavorite(data.id))
         setIsFavorite(false)
         return 
     }
@@ -48,7 +55,6 @@ export default function Card({data,type}) {
 
   useEffect(()=>{
     if(favoritos.arr){
-      console.log('favorites-->',favoritos.arr)
       if(favoritos.arr.length == 0){ return setIsFavorite(false)}
       else if(favoritos.arr.length && favoritos.arr?.filter((f) => f.id === data.id).length){
         return setIsFavorite(true)
@@ -57,7 +63,7 @@ export default function Card({data,type}) {
   },[charactersF,locationsF,episodesF])
 
   return (
-    <div>
+    <div onClick={() => goInfo()}>
         <h2>{data.name}</h2>
         {data.image ? ( <img src={data.image} alt={data.name+' image'} /> ) : null }
         {data.type ? ( <>Type: <p>{data.type}</p></>) : null}

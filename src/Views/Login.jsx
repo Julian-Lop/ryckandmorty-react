@@ -38,7 +38,7 @@ export default function Login() {
         <button onClick={submit}>Login</button>
       </> :
       <>
-        <h1>Logued</h1>
+        <h1>Logged</h1>
         <h2>{user.data.email}</h2>
         <button onClick={logout}>Logout</button>
       </>

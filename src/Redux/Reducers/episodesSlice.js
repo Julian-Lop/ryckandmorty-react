@@ -6,19 +6,19 @@ export const episodesReducer = createSlice({
       arr: []
     },
     reducers: {
-        getEpisodesFavorites: (state) => {
+        getEpisodeFavorites: (state) => {
           const favorites = localStorage.getItem('episodesFavorites')
           if(!favorites) return state
           let parsFav = JSON.parse(favorites)
           state.arr = parsFav
         },
-        addEpisodesFavorite: (state,action) => {
+        addEpisodeFavorite: (state,action) => {
           let currentFavorites = state.arr
           currentFavorites.push(action.payload)
           let strin = JSON.stringify(currentFavorites)
           localStorage.setItem('episodesFavorites',strin)
         },
-        deleteEpisodesfavorite: (state,action) => {
+        deleteEpisodefavorite: (state,action) => {
           let currentFavorites = state.arr
           let strin = currentFavorites.filter((f) => f.id != action.payload)
           strin = JSON.stringify(strin)
@@ -29,5 +29,5 @@ export const episodesReducer = createSlice({
     }
 })
 
-export const {addEpisodeFavorite,deleteEpisodesfavorite,getEpisodesFavorites} = episodesReducer.actions
+export const {addEpisodeFavorite,deleteEpisodefavorite,getEpisodeFavorites} = episodesReducer.actions
 export default episodesReducer.reducer

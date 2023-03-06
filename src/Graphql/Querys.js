@@ -55,3 +55,59 @@ export const EPISODES_PAGE = gql`
 			}
     }
   `
+
+export const GET_CHARACTER = gql`
+	query getCharacter($id: ID!){
+		character(id: $id){
+			id,
+			name,
+			status,
+			species,
+			type,
+			gender,
+			origin{
+				id,
+				name
+			},
+			location{
+				id,
+				name
+			},
+			image,
+			episode{
+				id,
+				name
+			}
+		}
+	}
+`
+
+	export const GET_LOCATION = gql`
+	query getLocation($id: ID!){
+		location(id: $id) {
+			id
+			name,
+			type,
+			dimension,
+			residents {
+				id,
+				name
+			}
+		}
+	}
+`
+
+export const GET_EPISODE = gql`
+	query getEpisode($id: ID!){
+		episode(id: $id){
+			id,
+			name,
+			air_date,
+			episode,
+			characters{
+				id,
+				name
+			}
+		}
+	}
+`

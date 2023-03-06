@@ -9,6 +9,9 @@ import Locations from '../Views/Locations'
 import Header from '../Components/Header'
 import AuthRoute from './AuthRoute'
 import Favorites from '../Views/Favorites'
+import Character from '../Views/Character'
+import Location from '../Views/Location'
+import Episode from '../Views/Episode'
 
 export default function Router() {
   return (
@@ -21,6 +24,9 @@ export default function Router() {
             <Route path='/locations' element={<AuthRoute><Locations/></AuthRoute>} />
             <Route path='/episodes' element={<AuthRoute><Episodes/></AuthRoute>} />
             <Route path='/favorites' element={<AuthRoute><Favorites/></AuthRoute>} />
+            <Route path='/characters/:id' element={<AuthRoute><Character/></AuthRoute>} />
+            <Route path='/locations/:id' element={<AuthRoute><Location/></AuthRoute>} />
+            <Route path='/episodes/:id' element={<AuthRoute><Episode/></AuthRoute>} />
         </Routes>
     </BrowserRouter>
   )
