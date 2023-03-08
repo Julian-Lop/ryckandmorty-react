@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 
 //Components
 import Cards from '../Components/Cards'
+import Pagination from '../Components/Pagination'
 
 //Querys
 import { LOCATIONS_PAGE_FILTER } from '../Graphql/Querys'
@@ -23,6 +24,7 @@ export default function Locations() {
     setCurrentPage(pag)
   }
 
+  let pages = result?.data?.locations?.info.pages || false
   let next = result?.data?.locations?.info.next || 1
 	let prev = result?.data?.locations?.info.prev || 1
 
@@ -56,9 +58,7 @@ export default function Locations() {
 				<button onClick={() => submitFilter()}>Filter</button>
 			</div>
 			<div>
-				<button onClick={() => setPage(prev)}>prev</button>
-				<span style={{marginLeft:'10px',marginRight:'10px',borderRadius:'50px',padding:'10px',background:'#fefefe',color:'#000000'}}>{currentPage}</span>
-				<button onClick={() => setPage(next)}>next</button>
+      {pages && <Pagination pages={pages} current={currentPage} next={next} prev={prev} setPage={setPage} />}
 			</div>
       {!result.data ? <p>Loading...</p> :
         (
