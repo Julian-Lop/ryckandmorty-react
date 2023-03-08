@@ -63,8 +63,8 @@ export default function Card({data,type}) {
   },[charactersF,locationsF,episodesF])
 
   return (
-    <div onClick={() => goInfo()} style={{width:'300px',height:'max-content', border:'1px solid #fefefe',borderRadius:'10px',marginBottom:'20px',paddingBottom:'10px',marginTop:'10px'}}>
-        <h2>{data.name}</h2>
+    <div style={{width:'300px',height:'max-content', border:'1px solid #fefefe',borderRadius:'10px',marginBottom:'20px',paddingBottom:'10px',marginTop:'10px'}}>
+        <h2 onClick={() => goInfo()}>{data.name}</h2>
         {data.image ? ( <img src={data.image} alt={data.name+' image'} /> ) : null }
         {data.type ? ( <p><b>Type:</b> {data.type}</p>) : null}
         {data.dimension ? ( <p><b>Dimension:</b> {data.dimension}</p>) : null}

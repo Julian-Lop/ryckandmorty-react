@@ -1,31 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+//Actions Store
+import { getCharacters, addCharacters, deleteCharacters } from "../Actions/actionCharacters"
+
 export const charactersReducer = createSlice({
     name: 'characters',
     initialState:{
       arr: []
     },
     reducers: {
-        getCharacterFavorites: (state) => {
-          const favorites = localStorage.getItem('charactersFavorites')
-          if(!favorites) return state
-          let parsFav = JSON.parse(favorites)
-          state.arr = parsFav
-        },
-        addCharacterFavorite: (state,action) => {
-          let currentFavorites = state.arr
-          currentFavorites.push(action.payload)
-          let strin = JSON.stringify(currentFavorites)
-          localStorage.setItem('charactersFavorites',strin)
-        },
-        deleteCharacterfavorite: (state,action) => {
-          let currentFavorites = state.arr
-          let strin = currentFavorites.filter((f) => f.id != action.payload)
-          strin = JSON.stringify(strin)
-          localStorage.removeItem('charactersFavorites')
-          localStorage.setItem('charactersFavorites',strin)
-          state.arr = JSON.parse(strin)
-        }
+        getCharacterFavorites: getCharacters,
+        addCharacterFavorite: addCharacters,
+        deleteCharacterfavorite: deleteCharacters
     }
 })
 
