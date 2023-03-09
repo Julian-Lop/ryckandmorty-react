@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom'
 
 import Login from '../Views/Login'
 import Register from '../Views/Register'
@@ -15,7 +15,7 @@ import Episode from '../Views/Episode'
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <HashRouter>
         <Header/>
         <Routes>
             <Route path='/' element={<Login/>} />
@@ -28,6 +28,6 @@ export default function Router() {
             <Route path='/locations/:id' element={<AuthRoute><Location/></AuthRoute>} />
             <Route path='/episodes/:id' element={<AuthRoute><Episode/></AuthRoute>} />
         </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
