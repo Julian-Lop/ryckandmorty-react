@@ -2,7 +2,6 @@ import { getAuth } from 'firebase/auth'
 import { getDatabase } from 'firebase/database'
 import React from 'react'
 import { AuthProvider, DatabaseProvider, useFirebaseApp } from 'reactfire'
-import './App.css'
 
 //Router
 import Router from './Router/Router'
@@ -15,11 +14,13 @@ function App() {
   const auth = getAuth(app)
 
   return (
+    <div className='App'>
     <AuthProvider sdk={auth}>
       <DatabaseProvider sdk={database}>
-        <Router/>
+        <Router />
       </DatabaseProvider>
     </AuthProvider>
+    </div>
   )
 }
 

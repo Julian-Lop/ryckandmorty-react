@@ -12,6 +12,7 @@ import Favorites from '../Views/Favorites'
 import Character from '../Views/Character'
 import Location from '../Views/Location'
 import Episode from '../Views/Episode'
+import Home from '../Views/Home'
 
 export default function Router() {
   return (
@@ -20,6 +21,7 @@ export default function Router() {
         <Routes>
             <Route path='/' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
+            <Route path='/home' element={<AuthRoute><Home/></AuthRoute>} />
             <Route path='/characters' element={<AuthRoute><Characters/></AuthRoute>} />
             <Route path='/locations' element={<AuthRoute><Locations/></AuthRoute>} />
             <Route path='/episodes' element={<AuthRoute><Episodes/></AuthRoute>} />
