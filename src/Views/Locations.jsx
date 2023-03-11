@@ -83,7 +83,7 @@ export default function Locations() {
 			</div>
 			<div className='ButtonsFilters'>
 				<button className='btn2' onClick={() => submitFilter()}>Filter</button>
-				<button className='btnIcon delete' onClick={() => deleteFil()}><i class="fas fa-trash"></i></button>
+				<button className='btnIcon delete' onClick={() => deleteFil()}><i className="fas fa-trash"></i></button>
 			</div>
 			<div>
       <Pagination pages={pages} current={currentPage} next={next} prev={prev} setPage={setPage} />

@@ -441,6 +441,12 @@ body{
   0 0 60px linear-gradient(#01B4C6, #5CAD4A);
 }
 
+.Cards{
+  display:flex;
+  flex-wrap: wrap; 
+  justify-content:space-around;
+}
+
 .Card{
  position: relative;
  width: 300px;

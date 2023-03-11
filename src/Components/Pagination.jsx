@@ -12,7 +12,7 @@ export default function Pagination({pages,current,prev,next,setPage}) {
 	
 	return (
 		<div className='Pagination'>
-			<button className='btnArrow' disabled={current == 1} onClick={() => setPage(prev)}><i class="fas fa-angle-left"></i></button>
+			<button className='btnArrow' disabled={current == 1} onClick={() => setPage(prev)}><i className="fas fa-angle-left"></i></button>
 			{arrayPag(pages).map((pg) => {
 					if(current == pages)return (pg+1 > pages-3) && (pg+1 === current ? 
 						(<span key={pg} className='PagNumber active'>{pg+1}</span>)
@@ -31,7 +31,7 @@ export default function Pagination({pages,current,prev,next,setPage}) {
 						)
 					}
 			)}
-			<button className='btnArrow' disabled={current == pages} onClick={() => setPage(next)}><i class="fas fa-angle-right"></i></button>
+			<button className='btnArrow' disabled={current == pages} onClick={() => setPage(next)}><i className="fas fa-angle-right"></i></button>
 		</div>
 	)
 }
