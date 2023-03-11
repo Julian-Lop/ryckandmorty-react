@@ -672,7 +672,7 @@ body{
   z-index: 1000;
 }
 
-.Tab:nth-child(1):hover ~ #marker2::before, .Tab.active:nth-child(1) ~ #marker2::before{
+.Tab:nth-child(1):hover ~ #marker2::before, .activeF:nth-child(1) ~ #marker2::before{
   background: #E762D7FF;
   box-shadow: 0 0 15px #E762D7FF,
   0 0 30px #E762D7FF,
@@ -680,7 +680,7 @@ body{
   0 0 60px #E762D7FF;
 }
 
-.Tab:nth-child(2):hover ~ #marker2::before, .Tab.active:nth-child(2) ~ #marker2::before{
+.Tab:nth-child(2):hover ~ #marker2::before, .activeF:nth-child(2) ~ #marker2::before{
   background: #B7E4F9FF;
   box-shadow: 0 0 15px #B7E4F9FF,
   0 0 30px #B7E4F9FF,
@@ -688,7 +688,7 @@ body{
   0 0 60px #B7E4F9FF;
 }
 
-.Tab:nth-child(3):hover ~ #marker2::before, .Tab.active:nth-child(3) ~ #marker2::before{
+.Tab:nth-child(3):hover ~ #marker2::before, .activeF:nth-child(3) ~ #marker2::before{
   background: #FAE48BFF;
   box-shadow: 0 0 15px #FAE48BFF,
   0 0 30px #FAE48BFF,
@@ -709,7 +709,12 @@ body{
   backdrop-filter: blur(15px);
 }
 
-.Tab.active{
+.Tab.activeF{
   font-weight: bold;
   backdrop-filter: blur(15px);
+}
+
+.SectionFav{
+  position:relative;
+  margin-top: 20px;
 }

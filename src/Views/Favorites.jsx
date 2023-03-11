@@ -38,7 +38,7 @@ export default function Favorites() {
       }
 
       function ReturnInd(){
-        const itemSelect = document.querySelector('.Tab.active')
+        const itemSelect = document.querySelector('.Tab.activeF')
         marker.style.left = itemSelect.offsetLeft+'px'
         marker.style.width = itemSelect.offsetWidth+'px'
       }
@@ -62,13 +62,13 @@ export default function Favorites() {
 			<h1>Favorite Section</h1>
 			<div>
 				<ul className='TabSection'>
-					<li className={typeFavorite == 1 ? 'Tab active' : 'Tab'} onClick={() => setTypeFavorite(1)}>Characters</li>
-					<li className={typeFavorite == 2 ? 'Tab active' : 'Tab'} onClick={() => setTypeFavorite(2)}>Locations</li>
-					<li className={typeFavorite == 3 ? 'Tab active' : 'Tab'} onClick={() => setTypeFavorite(3)}>Episodes</li>
+					<li className={typeFavorite == 1 ? 'Tab activeF' : 'Tab'} onClick={() => setTypeFavorite(1)}>Characters</li>
+					<li className={typeFavorite == 2 ? 'Tab activeF' : 'Tab'} onClick={() => setTypeFavorite(2)}>Locations</li>
+					<li className={typeFavorite == 3 ? 'Tab activeF' : 'Tab'} onClick={() => setTypeFavorite(3)}>Episodes</li>
 					<div id='marker2'></div>
 				</ul>
 			</div>
-			<div style={{position:'relative',marginTop:'150px',padding:'0px',paddingTop:'20px'}}>
+			<div className='SectionFav'>
 				{typeFavorite === 1 &&
 					<div>
 						{charactersF.arr.length ? <CardFavorites array={charactersF.arr} type={'characters'} /> : <span>Emprty List</span> }
