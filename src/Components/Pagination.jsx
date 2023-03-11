@@ -11,27 +11,27 @@ export default function Pagination({pages,current,prev,next,setPage}) {
 	}
 	
 	return (
-		<div>
-			<button disabled={current == 1} onClick={() => setPage(prev)}>prev</button>
+		<div className='Pagination'>
+			<button className='btnArrow' disabled={current == 1} onClick={() => setPage(prev)}><i class="fas fa-angle-left"></i></button>
 			{arrayPag(pages).map((pg) => {
 					if(current == pages)return (pg+1 > pages-3) && (pg+1 === current ? 
-						(<span key={pg} style={{marginLeft:'10px',marginRight:'10px',borderRadius:'50px',padding:'10px',background:'#fefefe',color:'#000000'}}>{pg+1}</span>)
+						(<span key={pg} className='PagNumber active'>{pg+1}</span>)
 						:
-						(<span key={pg} onClick={() => setPage(pg+1)} style={{cursor:'pointer', marginLeft:'10px',marginRight:'10px',borderRadius:'50px',padding:'10px'}}>{pg+1}</span>)
+						(<span key={pg} onClick={() => setPage(pg+1)} className='PagNumber'>{pg+1}</span>)
 						)
 				 	if(current > 2 && current < pages) return ((pg < next)) && ((pg > next-4)) && (pg+1 === current ? 
-						(<span key={pg} style={{marginLeft:'10px',marginRight:'10px',borderRadius:'50px',padding:'10px',background:'#fefefe',color:'#000000'}}>{pg+1}</span>)
+						(<span key={pg} className='PagNumber active'>{pg+1}</span>)
 						:
-						(<span key={pg} onClick={() => setPage(pg+1)} style={{cursor:'pointer', marginLeft:'10px',marginRight:'10px',borderRadius:'50px',padding:'10px'}}>{pg+1}</span>)
+						(<span key={pg} onClick={() => setPage(pg+1)} className='PagNumber'>{pg+1}</span>)
 						)
 					if(pg == 0 || pg == 1 || pg == 2) return (pg+1 === current ? 
-						(<span key={pg} style={{marginLeft:'10px',marginRight:'10px',borderRadius:'50px',padding:'10px',background:'#fefefe',color:'#000000'}}>{pg+1}</span>)
+						(<span key={pg} className='PagNumber active'>{pg+1}</span>)
 						:
-						(<span key={pg} onClick={() => setPage(pg+1)} style={{cursor:'pointer', marginLeft:'10px',marginRight:'10px',borderRadius:'50px',padding:'10px'}}>{pg+1}</span>)
+						(<span key={pg} onClick={() => setPage(pg+1)} className='PagNumber'>{pg+1}</span>)
 						)
 					}
 			)}
-			<button disabled={current == pages} onClick={() => setPage(next)}>next</button>
+			<button className='btnArrow' disabled={current == pages} onClick={() => setPage(next)}><i class="fas fa-angle-right"></i></button>
 		</div>
 	)
 }

@@ -75,17 +75,17 @@ export default function Characters() {
 	}
 
 	return (
-		<div>
+		<div className='Characters'>
 			<h1>Characters</h1>
-			<div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
-				<input type="text" id='nameF' name='nameF' placeholder='Name..' value={filter.nameF} onChange={(e) => filterChange(e)} />
-				<input type="text" id='stat' name='stat' placeholder='Status..' value={filter.stat} onChange={(e) => filterChange(e)} />
-				<input type="text" id='typ' name='typ' placeholder='Type..' value={filter.typ} onChange={(e) => filterChange(e)} />
-				<input type="text" id='gen' name='gen' placeholder='Gender..' value={filter.gen} onChange={(e) => filterChange(e)} />
+			<div className='FilterSection'>
+				<input className='InputFilter' type="text" id='nameF' name='nameF' placeholder='Name..' value={filter.nameF} defaultValue={null} onChange={(e) => filterChange(e)} />
+				<input className='InputFilter' type="text" id='stat' name='stat' placeholder='Status..' value={filter.stat} defaultValue={null} onChange={(e) => filterChange(e)} />
+				<input className='InputFilter' type="text" id='typ' name='typ' placeholder='Type..' value={filter.typ} defaultValue={null} onChange={(e) => filterChange(e)} />
+				<input className='InputFilter' type="text" id='gen' name='gen' placeholder='Gender..' value={filter.gen} defaultValue={null} onChange={(e) => filterChange(e)} />
 			</div>
-			<div style={{width:'200px',margin:'10px auto 10px auto',display:'flex',justifyContent:'space-around'}}>
-				<button onClick={() => submitFilter()}>Filter</button>
-				<button onClick={() => deleteFil()} style={{color:'red'}} >Delete</button>
+			<div className='ButtonsFilters'>
+				<button className='btn2' onClick={() => submitFilter()}>Filter</button>
+				<button className='btnIcon delete' onClick={() => deleteFil()} ><i class="fas fa-trash"></i></button>
 			</div>
 			<div>
 				<Pagination pages={pages} current={currentPage} next={next} prev={prev} setPage={setPage} />

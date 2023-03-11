@@ -74,14 +74,15 @@ export default function Episodes() {
 	}
 
   return (
-    <div>
+    <div className='Episodes'>
       <h1>Episodes</h1>
-      <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
-				<input type="text" id='nameF' name='nameF' value={filter.nameF} placeholder='Name..' onChange={(e) => filterChange(e)} />
-				<input type="text" id='episo' name='episo' value={filter.episo} placeholder='EpisodeCode..' onChange={(e) => filterChange(e)} />
+      <div className='FilterSection'>
+				<input className='InputFilter' type="text" id='nameF' name='nameF' value={filter.nameF} placeholder='Name..' onChange={(e) => filterChange(e)} />
+				<input className='InputFilter' type="text" id='episo' name='episo' value={filter.episo} placeholder='EpisodeCode..' onChange={(e) => filterChange(e)} />
 			</div>
-			<div style={{margin:'10px'}}>
-				<button onClick={() => submitFilter()}>Filter</button>
+			<div className='ButtonsFilters'>
+				<button className='btn2' onClick={() => submitFilter()}>Filter</button>
+				<button className='btnIcon delete' onClick={() => deleteFil()}><i class="fas fa-trash"></i></button>
 			</div>
 			<div>
 				{pages && <Pagination pages={pages} current={currentPage} next={next} prev={prev} setPage={setPage} />}

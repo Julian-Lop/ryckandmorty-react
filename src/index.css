@@ -13,12 +13,16 @@
 body{
   overflow: hidden;
 }
+::-webkit-scrollbar{
+  display: none;
+}
 
 .App{
   background-image: url(../src/assets/RickMorty.jpg);
   background-size: cover;
   background-position: bottom;
   height: 100vh;
+  overflow: auto !important;
 }
 
 .Login{
@@ -157,7 +161,7 @@ body{
 }
 
 ::placeholder{
-  color: #ffffff;
+  color: #c0c0c0;
 }
 
 .btn1{
@@ -179,7 +183,7 @@ body{
   letter-spacing: 1px;
 }
 
-.btn2{
+.btn2,.btnCard{
   background: #fff;
   color: #666;
   max-width: 100px;
@@ -195,6 +199,68 @@ body{
   font-size: 14px;
   letter-spacing: 1px;
   z-index: 1000;
+}
+
+.btnCard{
+  width: 60px;
+}
+
+.btnIcon{
+  background: none;
+  width: 40px;
+  height: 25px;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btnIcon.delete{
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnIcon.delete:hover{
+  color: #fB6467FF;
+}
+
+.btnIcon:hover{
+  transform: scale(1.2);
+  transition: 0.3s;
+}
+
+.btnIcon i{
+  filter: drop-shadow(0px 0px 15px black);
+  transition: 0.3s;
+}
+
+.btnIcon.favorite i{
+  filter: drop-shadow(0px 0px 10px red);
+  transition: 0.3s;
+}
+
+.btnIcon.favorite{
+  color: #fB6467FF;
+}
+
+.btnArrow{
+  text-align: center;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  font-size: 17.5px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+
+.btnArrow:hover{
+  border: 1px solid white;
+  transform: scale(1.2);
+  box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
 }
 
 .Navbar{
@@ -257,7 +323,7 @@ body{
   filter: blur(15px);
 }
 
-.Navbar ul li:nth-child(1) .active::before{
+/* .Navbar ul li:nth-child(1) .active::before{
   background: #A7CB54;
   box-shadow: 0 0 15px #A7CB54,
   0 0 30px #A7CB54,
@@ -295,7 +361,7 @@ body{
   0 0 30px linear-gradient(#01B4C6, #5CAD4A),
   0 0 45px linear-gradient(#01B4C6, #5CAD4A),
   0 0 60px linear-gradient(#01B4C6, #5CAD4A);
-}
+} */
 
 .Navbar:before{
   content: '';
@@ -335,7 +401,15 @@ body{
   0 0 60px #A7CB54;
 }
 
-.Navbar ul li:nth-child(2):hover ~ #marker::before{
+.Navbar ul li:nth-child(1):hover ~ #marker::before, .Navbar ul .act:nth-child(1) ~ #marker::before{
+  background: #A7CB54;
+  box-shadow: 0 0 15px #A7CB54,
+  0 0 30px #A7CB54,
+  0 0 45px #A7CB54,
+  0 0 60px #A7CB54;
+}
+
+.Navbar ul li:nth-child(2):hover ~ #marker::before, .Navbar ul .act:nth-child(2) ~ #marker::before{
   background: #208D45;
   box-shadow: 0 0 15px #208D45,
   0 0 30px #208D45,
@@ -343,7 +417,7 @@ body{
   0 0 60px #208D45;
 }
 
-.Navbar ul li:nth-child(3):hover ~ #marker::before{
+.Navbar ul li:nth-child(3):hover ~ #marker::before, .Navbar ul .act:nth-child(3) ~ #marker::before{
   background: #5CAD4A;
   box-shadow: 0 0 15px #5CAD4A,
   0 0 30px #5CAD4A,
@@ -351,7 +425,7 @@ body{
   0 0 60px #5CAD4A;
 }
 
-.Navbar ul li:nth-child(4):hover ~ #marker::before{
+.Navbar ul li:nth-child(4):hover ~ #marker::before, .Navbar ul .act:nth-child(4) ~ #marker::before{
   background: #F0F2EB;
   box-shadow: 0 0 15px #F0F2EB,
   0 0 30px #F0F2EB,
@@ -359,10 +433,277 @@ body{
   0 0 60px #F0F2EB;
 }
 
-.Navbar ul li:nth-child(5):hover ~ #marker::before{
+.Navbar ul li:nth-child(5):hover ~ #marker::before, .Navbar ul .act:nth-child(5) ~ #marker::before{
   background: linear-gradient(#01B4C6, #5CAD4A);
   box-shadow: 0 0 15px linear-gradient(#01B4C6, #5CAD4A),
   0 0 30px linear-gradient(#01B4C6, #5CAD4A),
   0 0 45px linear-gradient(#01B4C6, #5CAD4A),
   0 0 60px linear-gradient(#01B4C6, #5CAD4A);
+}
+
+.Card{
+ position: relative;
+ width: 300px;
+ height: 400px;
+ background: rgba(255, 255, 255, 0.05);
+ margin: 20px;
+ box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+ border-radius: 15px;
+ display: flex;
+ justify-content: center;
+ align-items: center; 
+ backdrop-filter: blur(10px);
+ cursor: pointer;
+}
+
+.Card .content{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+.Card:hover .content{
+  opacity: 1;
+  transform: translateY(-20px);
+}
+
+.Card .content .imgBx{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 10px solid rgba(0,0,0,0.25);
+}
+
+.Card .content .imgBx img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.Card .content .contentBx{
+  text-align: center;
+}
+.Card .content .contentBX h2{
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+  margin: 20px 0 10px;
+  line-height: 1.1rem;
+}
+
+.Card .sci {
+  position: absolute;
+  top: 100%;
+  bottom: 50px;
+  display: flex;
+}
+
+.Card .sci li{
+  list-style: none;
+  margin: 0 10px;
+  transform: translateY(40px);
+  transition: 0.5s;
+  opacity: 0;
+  transition-delay: calc(0.1s * var(--i));
+}
+
+.Card:hover .sci li {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.Characters,.Locations,.Episodes,.Favorites {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.Characters h1,.Locations h1,.Episodes h1, .Favorites h1{
+  margin-bottom: 20px;
+}
+
+.FilterSection{
+  width: 90%;
+  margin: auto;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.InputFilter{
+  width: 100%;
+  margin: 0 2%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 35px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.ButtonsFilters{
+  width: 230px;
+  max-width: 80%;
+  min-width: 200px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.Pagination{
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PagNumber{
+  cursor:pointer;
+  margin-left:10px;
+  margin-right:10px;
+  border-radius:50px;
+  padding:10px;
+}
+
+.PagNumber.active{
+  width: 18px;
+  height: 18px;
+  margin-left:10px;
+  margin-right:10px;
+  border-radius:50px;
+  background:#fefefe;
+  color:#000000;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.TabSection{
+  padding:0;
+  width:80%;
+  height: 40px;
+  margin: auto;
+  list-style:none;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+}
+
+.TabSection::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+#marker2{
+  position: absolute;
+  top: 0;
+  left: 110px;
+  width: 41px;
+  height: 41px;
+  z-index: -2;
+  transition: 0.5s;
+  filter: blur(5px);
+}
+
+#marker2::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 40px;
+  height: 40px;
+  transition: 0.5s;
+  border-radius: 50%;
+  background: #E762D7FF;
+  box-shadow: 0 0 15px #E762D7FF,
+  0 0 30px #E762D7FF,
+  0 0 45px #E762D7FF,
+  0 0 60px #E762D7FF;
+}
+
+.Tab{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor:pointer;
+  color: #fff;
+  z-index: 1000;
+}
+
+.Tab:nth-child(1):hover ~ #marker2::before, .Tab.active:nth-child(1) ~ #marker2::before{
+  background: #E762D7FF;
+  box-shadow: 0 0 15px #E762D7FF,
+  0 0 30px #E762D7FF,
+  0 0 45px #E762D7FF,
+  0 0 60px #E762D7FF;
+}
+
+.Tab:nth-child(2):hover ~ #marker2::before, .Tab.active:nth-child(2) ~ #marker2::before{
+  background: #B7E4F9FF;
+  box-shadow: 0 0 15px #B7E4F9FF,
+  0 0 30px #B7E4F9FF,
+  0 0 45px #B7E4F9FF,
+  0 0 60px #B7E4F9FF;
+}
+
+.Tab:nth-child(3):hover ~ #marker2::before, .Tab.active:nth-child(3) ~ #marker2::before{
+  background: #FAE48BFF;
+  box-shadow: 0 0 15px #FAE48BFF,
+  0 0 30px #FAE48BFF,
+  0 0 45px #FAE48BFF,
+  0 0 60px #FAE48BFF;
+}
+
+.Tab:nth-child(1){
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.Tab:nth-child(3){
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+.Tab:hover{
+  backdrop-filter: blur(15px);
+}
+
+.Tab.active{
+  font-weight: bold;
+  backdrop-filter: blur(15px);
 }

@@ -8,8 +8,11 @@ import CardFavorites from '../Components/CardFavorites'
 import { getCharacterFavorites } from '../Redux/Reducers/charactersSlice'
 import { getLocationFavorites } from '../Redux/Reducers/locationsSlice'
 import { getEpisodeFavorites } from '../Redux/Reducers/episodesSlice'
+import { useFirebaseApp, useUser } from 'reactfire'
 
 export default function Favorites() {
+	const user = useUser()
+
 	const dispatch = useDispatch()
 	const charactersF = useSelector((state) => state.characters)
 	const locationsF = useSelector((state) => state.locations)
@@ -23,14 +26,46 @@ export default function Favorites() {
 		dispatch(getEpisodeFavorites())
 	},[])
 	
+	useEffect(()=>{
+		if(user.data){
+      const marker = document.querySelector('#marker2')
+
+      const item = document.querySelectorAll('.Tab')
+
+      function Indicator(e){
+        marker.style.left = e.offsetLeft+'px'
+        marker.style.width = e.offsetWidth+'px'
+      }
+
+      function ReturnInd(){
+        const itemSelect = document.querySelector('.Tab.active')
+        marker.style.left = itemSelect.offsetLeft+'px'
+        marker.style.width = itemSelect.offsetWidth+'px'
+      }
+
+      item.forEach(Link => {
+        Link.addEventListener('mouseover', (e) => {
+          Indicator(e.target)
+        })
+      })
+
+      item.forEach(Link => {
+        Link.addEventListener('mouseout', (e) => {
+          ReturnInd()
+        })
+      })
+    }
+	})
+
 	return (
-		<div>
-			<div style={{position:'absolute',width:'400px',left:'0',right:'0',top:'5%',bottom:'0',margin:'auto',textAlign:'center'}}>
-				<h1>Favorite Section</h1>
-				<ul style={{padding:'0',width:'100%',listStyle:'none',display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
-					<li style={{cursor:'pointer',color: typeFavorite == 1 && '#5D44FB',fontWeight:typeFavorite == 1 && 'bold'}} onClick={() => setTypeFavorite(1)}>Characters</li>
-					<li style={{cursor:'pointer',color: typeFavorite == 2 && '#5D44FB',fontWeight:typeFavorite == 2 && 'bold'}} onClick={() => setTypeFavorite(2)}>Locations</li>
-					<li style={{cursor:'pointer',color: typeFavorite == 3 && '#5D44FB',fontWeight:typeFavorite == 3 && 'bold'}} onClick={() => setTypeFavorite(3)}>Episodes</li>
+		<div className='Favorites'>
+			<h1>Favorite Section</h1>
+			<div>
+				<ul className='TabSection'>
+					<li className={typeFavorite == 1 ? 'Tab active' : 'Tab'} onClick={() => setTypeFavorite(1)}>Characters</li>
+					<li className={typeFavorite == 2 ? 'Tab active' : 'Tab'} onClick={() => setTypeFavorite(2)}>Locations</li>
+					<li className={typeFavorite == 3 ? 'Tab active' : 'Tab'} onClick={() => setTypeFavorite(3)}>Episodes</li>
+					<div id='marker2'></div>
 				</ul>
 			</div>
 			<div style={{position:'relative',marginTop:'150px',padding:'0px',paddingTop:'20px'}}>

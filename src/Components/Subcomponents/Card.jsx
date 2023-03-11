@@ -63,19 +63,32 @@ export default function Card({data,type}) {
   },[charactersF,locationsF,episodesF])
 
   return (
-    <div style={{width:'300px',height:'max-content', border:'1px solid #fefefe',borderRadius:'10px',marginBottom:'20px',paddingBottom:'10px',marginTop:'10px'}}>
-        <h2 onClick={() => goInfo()}>{data.name}</h2>
-        {data.image ? ( <img src={data.image} alt={data.name+' image'} /> ) : null }
-        {data.type ? ( <p><b>Type:</b> {data.type}</p>) : null}
-        {data.dimension ? ( <p><b>Dimension:</b> {data.dimension}</p>) : null}
-        {data.air_date ? ( <p><b>Air Date:</b> {data.air_date}</p>) : null}
-        {data.episode ? ( <p><b>Episode Code:</b> {data.episode}</p>) : null}
-        <br />
-        {!isFavorite ?
-          <button style={{background:'#90BF77'}} onClick={() => addFavorites()}>Add to Favorites</button> 
-        :
-          <button style={{background:'#D24B4B'}} onClick={() => deleteFavorites()}>Delete Favorites</button>
-        }
+    <div className='Card'>
+      <div className='content'>
+        <div className='imgBx'>
+          {data.image ? ( <img src={data.image} alt={data.name+' image'} /> ) : null }
+        </div>
+        <div className='contentBx'>
+          <h2>{data.name}</h2>
+          {data.type ? ( <p><b>Type:</b> {data.type}</p>) : null}
+          {data.dimension ? ( <p><b>Dimension:</b> {data.dimension}</p>) : null}
+          {data.air_date ? ( <p><b>Air Date:</b> {data.air_date}</p>) : null}
+          {data.episode ? ( <p><b>Episode Code:</b> {data.episode}</p>) : null}
+          <br />
+        </div>
+        <div className='sci'>
+          <li style={{'--i':1}}>
+            <button className='btnCard' onClick={() => goInfo()}>Info</button>
+          </li>
+          <li style={{'--i':2}}>
+            {!isFavorite ?
+              <button className='btnIcon' onClick={() => addFavorites()}><i className="far fa-heart"></i></button> 
+            :
+              <button className='btnIcon favorite' onClick={() => deleteFavorites()}><i className="fas fa-heart"></i></button>
+            }
+          </li>
+        </div>
+      </div>
     </div>
   )
 }
