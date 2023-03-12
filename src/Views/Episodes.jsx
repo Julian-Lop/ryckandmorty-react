@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 //Components
 import Cards from '../Components/Cards'
 import Pagination from '../Components/Pagination'
+import Loader from '../Components/Subcomponents/Loader'
 
 //Querys
 import { EPISODES_PAGE_FILTER } from '../Graphql/Querys'
@@ -87,7 +88,7 @@ export default function Episodes() {
 			<div>
 				{pages && <Pagination pages={pages} current={currentPage} next={next} prev={prev} setPage={setPage} />}
 			</div>
-			{!result.data ? <p>Loading...</p> :
+			{!result.data ? <Loader/> :
         (
           <>
             {result.data.episodes &&

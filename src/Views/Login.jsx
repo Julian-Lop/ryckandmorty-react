@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { getAuth, signInWithEmailAndPassword,signOut  } from 'firebase/auth'
 import { useUser } from 'reactfire'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../Components/Subcomponents/Loader'
 
 export default function Login() {
 
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
+  const [load, setLoad] = useState(false)
 
   const user = useUser()
   const navigate = useNavigate()
@@ -17,9 +19,12 @@ export default function Login() {
     if(!email || !password){
       return alert('Email or Password empty')
     }
+    setLoad(true)
     try {
-      const sign = await signInWithEmailAndPassword(auth,email,password)    
+      const sign = await signInWithEmailAndPassword(auth,email,password)
+      setLoad(false)
     } catch (error) {
+      setLoad(false)
       return alert('Wrong email or password')
     } 
     
@@ -40,7 +45,8 @@ export default function Login() {
   return (
     user && 
     <div className='Login' >
-      {!user.data &&
+      {load && <Loader/>}
+      {!user.data && !load &&
       <div className='box'>
         <div className='square' style={{ "--i":0 }}></div>
         <div className='square' style={{ "--i":1 }}></div>

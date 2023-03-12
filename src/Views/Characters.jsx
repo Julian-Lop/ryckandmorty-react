@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 //Components
 import Cards from '../Components/Cards'
 import Pagination from '../Components/Pagination'
+import Loader from '../Components/Subcomponents/Loader'
 
 //Querys
 import { CHARACTERS_PAGE_FILTER } from '../Graphql/Querys'
@@ -78,10 +79,10 @@ export default function Characters() {
 		<div className='Characters'>
 			<h1>Characters</h1>
 			<div className='FilterSection'>
-				<input className='InputFilter' type="text" id='nameF' name='nameF' placeholder='Name..' value={filter.nameF} defaultValue={null} onChange={(e) => filterChange(e)} />
-				<input className='InputFilter' type="text" id='stat' name='stat' placeholder='Status..' value={filter.stat} defaultValue={null} onChange={(e) => filterChange(e)} />
-				<input className='InputFilter' type="text" id='typ' name='typ' placeholder='Type..' value={filter.typ} defaultValue={null} onChange={(e) => filterChange(e)} />
-				<input className='InputFilter' type="text" id='gen' name='gen' placeholder='Gender..' value={filter.gen} defaultValue={null} onChange={(e) => filterChange(e)} />
+				<input className='InputFilter' type="text" id='nameF' name='nameF' placeholder='Name..' value={filter ? filter.nameF : null} onChange={(e) => filterChange(e)} />
+				<input className='InputFilter' type="text" id='stat' name='stat' placeholder='Status..' value={filter ? filter.stat : null} onChange={(e) => filterChange(e)} />
+				<input className='InputFilter' type="text" id='typ' name='typ' placeholder='Type..' value={filter ? filter.typ : null}  onChange={(e) => filterChange(e)} />
+				<input className='InputFilter' type="text" id='gen' name='gen' placeholder='Gender..' value={filter ? filter.gen : null} onChange={(e) => filterChange(e)} />
 			</div>
 			<div className='ButtonsFilters'>
 				<button className='btn2' onClick={() => submitFilter()}>Filter</button>
@@ -90,7 +91,7 @@ export default function Characters() {
 			<div>
 				<Pagination pages={pages} current={currentPage} next={next} prev={prev} setPage={setPage} />
 			</div>
-			{!result.data ? <p>Loading...</p> :
+			{!result.data ? <Loader/> :
 				(
 					<>
 						{ result.data.characters &&
